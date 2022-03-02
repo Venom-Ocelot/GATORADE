@@ -53,11 +53,11 @@ def process_data(data):
 
     return (dct)
 
-spath = f"{os.getcwd()}/new74Tsets_Feb2020_oldCombined114"
+spath = f"{os.getcwd()}"
 print(spath)
 
 print("\nGrabbing directories within the training sets folder..")
-directories = os.listdir(spath)
+directories = os.listdir()
 print("Directories found:")
 print(f'{directories}')
 # Get size of path
@@ -75,7 +75,7 @@ for directory in directories:
 
 
         print("Now that all of the data has been processed, we need to print it all out to a text document.")
-        new_fl = open(f'new74Tsets_Feb2020_oldCombined114/neg.fasta', 'a')
+        new_fl = open(f'{spath}/neg.fasta', 'a')
         print("\nCreating a new variable called lk, and there is a new function that is being applied I'm not sure about...")
         lk = list(data_1.keys())
         print("printing lk")
@@ -97,18 +97,21 @@ for directory in directories:
         new_fl.close()
 
 for directory in directories:
+    print(f"Directory!!!! {directory}")
     if directory != "main.py" and directory != "neg.fasta":
-        shutil.copy(f"new74Tsets_Feb2020_oldCombined114/neg.fasta", f"new74Tsets_Feb2020_oldCombined114/{directory}/")
+        shutil.copy(f"{spath}/neg.fasta", f"{spath}/{directory}/")
 
-os.rename('new74Tsets_Feb2020_oldCombined114/neg.fasta', 'enhancersAdded.fasta')
+os.rename(f'{spath}/neg.fasta', 'enhancersAdded.fasta')
 
 
 # search and destroy
 
 
-spath = f"{os.getcwd()}/new74Tsets_Feb2020_oldCombined114"
+spath = f"{os.getcwd()}"
+print("printing os.listdir()")
+print(os.listdir())
 
-directories = os.listdir(spath)
+directories = os.listdir()
 print(directories)
 # for directory in directories:
 # 	print(directory)
@@ -117,7 +120,7 @@ for directory in directories:
     print('>>>Reading and processing the files...')
 
     print(directory)
-    if "main.py" != directory:
+    if "main.py" != directory and "enhancersAdded.fasta" != directory:
         data_1 = process_data(open(f'{spath}/{directory}/neg.fasta', 'r').read())
         data_2 = process_data(open(f"{spath}/{directory}/crms.fasta", 'r').read())
 
