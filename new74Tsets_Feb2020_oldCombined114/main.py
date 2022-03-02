@@ -1,6 +1,10 @@
 import os
 import shutil
 
+# filesystem
+spath = os.getcwd()
+directories = os.listdir()
+
 def process_data(data):
     # This function alone is able to create a dictionary and make
     print("A new variable named datasplit is declared. The parameter it takes is named data.\n")
@@ -51,20 +55,19 @@ def process_data(data):
                 print(new_data)
                 print('\n')
 
-    return (dct)
+    return dct
 
-spath = f"{os.getcwd()}"
-print(spath)
 
-print("\nGrabbing directories within the training sets folder..")
-directories = os.listdir()
-print("Directories found:")
-print(f'{directories}')
+print("Directories:")
+print(directories)
 # Get size of path
 sizeOfPath = len(os.listdir(spath))
-print(f"The size of the path is {sizeOfPath}\n")
-print("Assigning the directories to a path...")
+print(f"Sets found: {sizeOfPath}\n")
 
+print("Assigning the sets to a path...")
+# Iterates over the directory names and proceeds to look for the path with the training set name named crms.fasta,
+# reads the file, and copies the contents to new_fl, aka a file that will be placed above the training set directories.
+# This file contains all of the crms from every directory. 
 print("Beginning a for loop that will iterate over all of the training set names such as adult midgut, or antenna.")
 print("Starting...\n")
 for directory in directories:
@@ -72,14 +75,10 @@ for directory in directories:
         print('crms path:')
         data_1 = process_data(open(spath+'/'+directory+'/'+'crms.fasta', 'r').read())
         print(data_1)
-
-
-        print("Now that all of the data has been processed, we need to print it all out to a text document.")
+        
+        # creation of file
         new_fl = open(f'{spath}/neg.fasta', 'a')
-        print("\nCreating a new variable called lk, and there is a new function that is being applied I'm not sure about...")
         lk = list(data_1.keys())
-        print("printing lk")
-        print(lk)
         print("printing lk[-1]")
         print(lk[-1])
         for g in data_1:
@@ -96,25 +95,19 @@ for directory in directories:
                 new_fl.write(g + '\n' + data_1[g] + '\n\n')
         new_fl.close()
 
+# We copy the file we created and paste it into each directory as neg.fasta 
 for directory in directories:
-    print(f"Directory!!!! {directory}")
     if directory != "main.py" and directory != "neg.fasta":
         shutil.copy(f"{spath}/neg.fasta", f"{spath}/{directory}/")
 
+# Finally, we print it out again as a sort of "receipt." It is named "enhancersAdded.fasta"
 os.rename(f'{spath}/neg.fasta', 'enhancersAdded.fasta')
 
 
 # search and destroy
 
-
-spath = f"{os.getcwd()}"
-print("printing os.listdir()")
-print(os.listdir())
-
-directories = os.listdir()
-print(directories)
-# for directory in directories:
-# 	print(directory)
+# searchAndDestroy.py finds matches between a crms and a neg file within a training set and removes any matches from the
+# neg file. 
 
 for directory in directories:
     print('>>>Reading and processing the files...')
@@ -142,4 +135,4 @@ for directory in directories:
     new_fl.close()
     print(
         'File has been processed any overlapping data is removed from first file. \nAll Processed done, Please Close the window')
-
+    
