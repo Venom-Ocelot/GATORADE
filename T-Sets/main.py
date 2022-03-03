@@ -44,7 +44,7 @@ print("Assigning the sets to a path...")
 print("Beginning a for loop that will iterate over all of the training set names such as adult midgut, or antenna.")
 print("Starting...\n")
 for directory in directories:
-    if directory != __file__:
+    if directory != "main.py":
         print('crms path:')
         data_1 = process_data(open(spath+'/'+directory+'/'+'crms.fasta', 'r').read())
         print(data_1)
@@ -70,7 +70,7 @@ for directory in directories:
 
 # We copy the file we created and paste it into each directory as neg.fasta
 for directory in directories:
-    if directory != __file__ and directory != "neg.fasta":
+    if directory != "main.py" and directory != "neg.fasta":
         shutil.copy(f"{spath}/neg.fasta", f"{spath}/{directory}/")
 
 # Finally, we print it out again as a sort of "receipt." It is named "enhancersAdded.fasta"
