@@ -1,2 +1,7 @@
-.idea/
+.idea
 sets/realsets
+*.iws
+*.iml
+*.ipr
+
+
