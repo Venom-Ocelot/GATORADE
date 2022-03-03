@@ -98,16 +98,16 @@ for directory in directories:
         new_fl.close()
 
 for directory in directories:
-    shutil.copy(f"neg.fasta", f"new74Tsets_Feb2020_oldCombined114/{directory}/")
+    shutil.copy(f"neg.fasta", f"T-Sets/{directory}/")
 
 os.rename('neg.fasta', 'enhancersAdded.fasta')
 
 # # search and destroy
 # for directory in directories:
 #     print('crms path:')
-#     y = f"/home/gator/PycharmProjects/HalfonLabs/new74Tsets_Feb2020_oldCombined114/{directory}/crms.fasta"
+#     y = f"/home/gator/PycharmProjects/HalfonLabs/T-Sets/{directory}/crms.fasta"
 #     print(y)
-#     z = f"/home/gator/PycharmProjects/HalfonLabs/new74Tsets_Feb2020_oldCombined114/{directory}/neg.fasta"
+#     z = f"/home/gator/PycharmProjects/HalfonLabs/T-Sets/{directory}/neg.fasta"
 #     print("negs path:")
 #     print(z)
 #     print('>>>Reading and processing the files...')
@@ -132,8 +132,8 @@ os.rename('neg.fasta', 'enhancersAdded.fasta')
 #
 #     print(f'>>>Overlapping data found : {temp_data_1}')
 #     print("Creating a new variable named new_fl, opening the negs file for each directory.")
-#     print(f"The directory currently being worked on is new74Tsets_Feb2020_oldCombined114/{directory}/neg.fasta")
-#     new_fl = open(f'new74Tsets_Feb2020_oldCombined114/{directory}/neg.fasta', 'w')
+#     print(f"The directory currently being worked on is T-Sets/{directory}/neg.fasta")
+#     new_fl = open(f'T-Sets/{directory}/neg.fasta', 'w')
 #     print("\nCreating a new variable called lk, and there is a new function that is being applied I'm not sure about...")
 #     lk = list(data_1.keys())
 #     print('>>>Writing new data...')
