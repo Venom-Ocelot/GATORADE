@@ -71,7 +71,7 @@ print("Assigning the sets to a path...")
 print("Beginning a for loop that will iterate over all of the training set names such as adult midgut, or antenna.")
 print("Starting...\n")
 for directory in directories:
-    if directory != "main.py":
+    if directory != __file__:
         print('crms path:')
         data_1 = process_data(open(spath+'/'+directory+'/'+'crms.fasta', 'r').read())
         print(data_1)
