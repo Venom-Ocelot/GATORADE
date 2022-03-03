@@ -1,5 +1,6 @@
 .idea
 sets/realsets
+sets/fakesets
 *.iws
 *.iml
 *.ipr
