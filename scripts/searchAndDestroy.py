@@ -61,9 +61,8 @@ print(directories)
 # for directory in directories:
 # 	print(directory)
 
+print('>>>Reading and processing the files...')
 for directory in directories:
-    print('>>>Reading and processing the files...')
-
     print(directory)
     if __file__ != directory and "enhancersAdded.fasta" != directory:
         data_1 = process_data(open(f'{spath}/{directory}/neg.fasta', 'r').read())
