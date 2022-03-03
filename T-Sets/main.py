@@ -97,7 +97,7 @@ for directory in directories:
 
 # We copy the file we created and paste it into each directory as neg.fasta
 for directory in directories:
-    if directory != "main.py" and directory != "neg.fasta":
+    if directory != __file__ and directory != "neg.fasta":
         shutil.copy(f"{spath}/neg.fasta", f"{spath}/{directory}/")
 
 # Finally, we print it out again as a sort of "receipt." It is named "enhancersAdded.fasta"
