@@ -65,7 +65,7 @@ for directory in directories:
     print('>>>Reading and processing the files...')
 
     print(directory)
-    if "main.py" != directory and "enhancersAdded.fasta" != directory:
+    if __file__ != directory and "enhancersAdded.fasta" != directory:
         data_1 = process_data(open(f'{spath}/{directory}/neg.fasta', 'r').read())
         data_2 = process_data(open(f"{spath}/{directory}/crms.fasta", 'r').read())
 
@@ -84,7 +84,6 @@ for directory in directories:
                     new_fl.write(g + '\n' + data_1[g])
                 else:
                     new_fl.write(g + '\n' + data_1[g] + '\n\n')
-    new_fl.close()
-    print(
-        'File has been processed any overlapping data is removed from first file. \nAll Processed done, Please Close the window')
+                    new_fl.close()
+    print('Overlapping data has been removed from first file.')
 
