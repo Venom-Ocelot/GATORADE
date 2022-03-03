@@ -1,6 +1,9 @@
 import os
 import shutil
 
+# filesystem
+spath = os.getcwd()
+directories = os.listdir()
 
 def process_data(data):
     # This function alone is able to create a dictionary and make
@@ -54,36 +57,29 @@ def process_data(data):
 
     return (dct)
 
-spath = f"{os.getcwd()}/new74Tsets_Feb2020_oldCombined114"
-print(spath)
+print("\nGrabbing directories within the training sets folder..\nDirectories found:")
+print(directories)
+sizeOfPath = len(os.listdir())
+print(f"The number of directories detected within {spath} is: {sizeOfPath}\n")
 
-print("\nGrabbing directories within the training sets folder..")
-directories = os.listdir(spath)
-print("Directories found:")
-print(f'{directories}')
-# Get size of path
-sizeOfPath = len(os.listdir(spath))
-print(f"The size of the path is {sizeOfPath}\n")
-print("Assigning the directories to a path...")
-
-print("Beginning a for loop that will iterate over all of the training set names such as adult midgut, or antenna.")
-print("Starting...\n")
+print("Assigning the sets to a path...")
+# Iterates over the directory names and proceeds to look for the path with the training set name named crms.fasta,
+# reads the file, and copies the contents to new_fl, aka a file that will be placed above the training set directories.
+# This file contains all of the crms from every directory.
+print("Generating a neg.fasta file...")
 for directory in directories:
     if directory != "enhancersAdded.fasta":
-        print('crms path:')
-        data_1 = process_data(open(spath+'/'+directory+'/'+'crms.fasta', 'r').read())
-        print(data_1)
+        # crms general path
+        data_1 = process_data(open(f'{spath}/{directory}/crms.fasta', 'r').read())
+        print(f"crms.fasta found! Using {directory}/crms.fasta")
+        print("Data from crms file processed.\n")
 
-
-        print("Now that all of the data has been processed, we need to print it all out to a text document.")
-        new_fl = open(f'neg.fasta', 'a')
-        print("\nCreating a new variable called lk, and there is a new function that is being applied I'm not sure about...")
+        new_fl = open('neg.fasta', 'a')
+        # the .keys() function is able to grab the first dictionary word, if dict = a:b, .keys() returns 'a'
         lk = list(data_1.keys())
-        print("printing lk")
-        print(lk)
-        print("printing lk[-1]")
         print(lk[-1])
         for g in data_1:
+            # lk [-1] is grabbing the very last enhancer sequence name in the dictionary.
             if g == lk[-1]:
                 print("\nThe values match. Writing (g + newline + data_1[g]) to new_fl\n")
                 print("For reference, will print out each part of it.")
@@ -98,66 +94,7 @@ for directory in directories:
         new_fl.close()
 
 for directory in directories:
-    shutil.copy(f"neg.fasta", f"T-Sets/{directory}/")
+    shutil.copy("neg.fasta", f"{spath}/{directory}/")
 
+print("Renaming the neg.fasta file contained in the same directory as the training sets to 'enhancersAdded.fasta'")
 os.rename('neg.fasta', 'enhancersAdded.fasta')
-
-# # search and destroy
-# for directory in directories:
-#     print('crms path:')
-#     y = f"/home/gator/PycharmProjects/HalfonLabs/T-Sets/{directory}/crms.fasta"
-#     print(y)
-#     z = f"/home/gator/PycharmProjects/HalfonLabs/T-Sets/{directory}/neg.fasta"
-#     print("negs path:")
-#     print(z)
-#     print('>>>Reading and processing the files...')
-#
-#     data_1 = process_data(open(y, 'r').read())
-#     data_2 = process_data(open(z, 'r').read())
-#
-#     temp_data_1 = []
-#
-#     print("temp_data_1 is created as an array.")
-#
-#     print("for every item in data_1:")
-#     print("if the item is located in data_2")
-#     print("the item is added to temp_data_1")
-#     print("\nMy guess is that this item is the name of the enhancer sequence. If it is, verify and rename.")
-#
-#     for key in data_1:
-#         print(f"Key: {key}")
-#         if key in data_2:
-#             print(f'\n{key} was found in data_1 and now data_2. appending {key} to temp_data_1')
-#             temp_data_1.append(key)
-#
-#     print(f'>>>Overlapping data found : {temp_data_1}')
-#     print("Creating a new variable named new_fl, opening the negs file for each directory.")
-#     print(f"The directory currently being worked on is T-Sets/{directory}/neg.fasta")
-#     new_fl = open(f'T-Sets/{directory}/neg.fasta', 'w')
-#     print("\nCreating a new variable called lk, and there is a new function that is being applied I'm not sure about...")
-#     lk = list(data_1.keys())
-#     print('>>>Writing new data...')
-#
-#     print("New for loop created, iterating over items g in the variable data_1\n")
-#     for g in data_1:
-#         print("Checking if item g is not in temp_data_1")
-#         if g not in temp_data_1:
-#             print(f"\nItem g ({g}) is not in temp_data_1.\nChecking to see if item g ({g}) is equal to the variable lk[-1]")
-#             print(f"For reference, lk[-1] is {lk[-1]}.")
-#             if g == lk[-1]:
-#                 print("\nThe values match. Writing (g + newline + data_1[g]) to new_fl\n")
-#                 print("For reference, will print out each part of it.")
-#                 print("Printing")
-#                 print(g)
-#                 print('\n')
-#                 print(data_1[g])
-#                 new_fl.write(g + '\n' + data_1[g])
-#             else:
-#                 print(f"Since lk({lk[-1]}) is not equal to g({g}), we are going to write g + newline + data_1[g] + newlinenewline")
-#                 new_fl.write(g + '\n' + data_1[g] + '\n\n')
-#                 print(f"NEW DATA WRITTEN: {data_1[g]}")
-#     new_fl.close()
-#
-#
-#
-#
