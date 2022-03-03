@@ -105,7 +105,35 @@ for directory in directories:
                     new_fl.write(g + '\n' + data_1[g])
                 else:
                     new_fl.write(g + '\n' + data_1[g] + '\n\n')
-    new_fl.close()
-    print(
-        'File has been processed any overlapping data is removed from first file. \nAll Processed done, Please Close the window')
+                new_fl.close()
 
+# removeDuplicates.py
+
+def process_data(data):
+    new_l = data.split('\n\n')
+    dct = {}
+    for h in new_l:
+        tp = ''
+        for y in h.split('\n')[1::]:
+            tp += y + '\n'
+        tp = tp[:-1]
+        dct[h.split('\n')[0]] = tp
+    return dct
+
+
+for directory in directories:
+    if directory != "main.py":
+        data = process_data(open(f'{spath}/{directory}/neg.fasta', 'r').read())
+        print(data)
+        new_fl = open(f'{spath}/{directory}/neg.fasta', 'w')
+        lk = list(data.keys())
+        lk = list(set(lk))
+        print('>>>Writing new data...')
+        for g in lk:
+            if len(g) > 0:
+                if g == lk[-1]:
+                    new_fl.write(g + '\n' + data[g])
+                else:
+                    new_fl.write(g + '\n' + data[g] + '\n\n')
+
+        new_fl.close()
