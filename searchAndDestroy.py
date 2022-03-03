@@ -81,9 +81,8 @@ for directory in directories:
         for g in data_1:
             if g not in temp_data_1:
                 if g == lk[-1]:
-                    new_fl.write(g + '\n' + data_1[g])
+                    new_fl.write(f'{g}\n{data_1[g]}')
                 else:
-                    new_fl.write(g + '\n' + data_1[g] + '\n\n')
+                    new_fl.write(f'{g}\n{data_1[g]}\n\n')
                     new_fl.close()
     print('Overlapping data has been removed from first file.')
-
