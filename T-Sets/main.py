@@ -105,7 +105,7 @@ for directory in directories:
                     new_fl.write(g + '\n' + data_1[g])
                 else:
                     new_fl.write(g + '\n' + data_1[g] + '\n\n')
-                new_fl.close()
+        new_fl.close()
 
 # removeDuplicates.py
 
